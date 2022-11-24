@@ -1,7 +1,7 @@
 import {
   USERNAME_UNAVAILABLE,
   USERNAME_ROOM_REQUIRED,
-} from '../assets/constants';
+} from "../assets/constants";
 
 type User = {
   id: string;
@@ -11,13 +11,13 @@ type User = {
 
 const users: any = [];
 
-export const addUser = ({ id, name = '', room = '' }: User): any => {
+export const addUser = ({ id, name = "", room = "" }: User): any => {
   try {
     name = name.trim().toLowerCase();
     room = room.trim().toLowerCase();
 
     const existingUser = users.find(
-      (user: User) => user.room === room && user.name === name,
+      (user: User) => user.room === room && user.name === name
     );
 
     if (!name || !room) return { error: USERNAME_ROOM_REQUIRED };
@@ -28,7 +28,7 @@ export const addUser = ({ id, name = '', room = '' }: User): any => {
 
     users.push(user);
     return { user };
-  } catch (error) {
+  } catch (error: any) {
     return { error: error.message };
   }
 };
@@ -38,7 +38,7 @@ export const removeUser = (id: string) => {
     const index = users.findIndex((user: User) => user.id === id);
 
     if (index !== -1) return users.splice(index, 1)[0];
-  } catch (error) {
+  } catch (error: any) {
     return { error: error.message };
   }
 };
@@ -46,7 +46,7 @@ export const removeUser = (id: string) => {
 export const getUser = (id: string) => {
   try {
     return users.find((user: User) => user.id === id);
-  } catch (error) {
+  } catch (error: any) {
     return { error: error.message };
   }
 };
@@ -54,7 +54,7 @@ export const getUser = (id: string) => {
 export const getUsersInRoom = (room: string) => {
   try {
     return users.filter((user: User) => user.room === room);
-  } catch (error) {
+  } catch (error: any) {
     return { error: error.message };
   }
 };
